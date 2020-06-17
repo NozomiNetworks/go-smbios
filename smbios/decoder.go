@@ -194,7 +194,8 @@ func (d *Decoder) next() (*Structure, error) {
 		sysEnclosure := (*SystemEnclosure)(unsafe.Pointer(&fb[0]))
 
 		systemInfo.SystemEnclosure = &SystemEnclosure{}
-
+		//Bit 7 Chassis lock is present if 1. Otherwise, either a lock //is not present or it is unknown if the enclosure has a lock.
+		//Bits 6:0 Enumeration value
 		systemInfo.SystemEnclosure.Type = sysEnclosure.Type & 0x7F
 
 	}
