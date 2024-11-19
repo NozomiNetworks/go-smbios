@@ -24,11 +24,9 @@ type Header struct {
 //SystemEnclosure struct to fetch the chassis type information
 
 type SystemEnclosure struct {
-
 	Manufacturer byte
 
-	Type         byte
-
+	Type byte
 }
 
 // A Structure is an SMBIOS structure.
@@ -61,7 +59,6 @@ type SMBIOSBaseboardInfo struct {
 	ChassisHandle      uint16
 	BoardType          byte
 	ObjectHandlesCount byte
-	ObjectHandles      uintptr
 }
 
 type BaseboardInfo struct {
@@ -192,10 +189,10 @@ type Processor struct {
 type SystemInfo struct {
 	SystemManufacturerRef, SystemProductName, BiosSerial, VirtualMachineUUID,
 	MotherboardAdapter, Memory, ProcessorType, ProcessorID string
-	BiosInfo      *BIOSInfo
-	BaseboardInfo *BaseboardInfo
-	Processors    []*Processor
-	PhyMemory     []*PhysicalMemory
+	BiosInfo        *BIOSInfo
+	BaseboardInfo   *BaseboardInfo
+	Processors      []*Processor
+	PhyMemory       []*PhysicalMemory
 	SystemEnclosure *SystemEnclosure
 }
 

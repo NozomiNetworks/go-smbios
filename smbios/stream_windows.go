@@ -70,7 +70,7 @@ func nativeEndian() binary.ByteOrder {
 //
 //	From windows.h:
 //
-// 	struct RawSMBIOSData {
+//	struct RawSMBIOSData {
 //		BYTE 	Used20CallingMethod;
 //		BYTE	SMBIOSMajorVersion;
 //		BYTE 	SMBIOSMinorVersion;

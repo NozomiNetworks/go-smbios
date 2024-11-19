@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/digitalocean/go-smbios/smbios"
+	"github.com/NozomiNetworks/go-smbios/smbios"
 )
 
 func main() {

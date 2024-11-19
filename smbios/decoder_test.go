@@ -18,8 +18,9 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/digitalocean/go-smbios/smbios"
+	"github.com/NozomiNetworks/go-smbios/smbios"
 	"github.com/google/go-cmp/cmp"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestDecoder(t *testing.T) {
@@ -189,4 +190,22 @@ func TestDecoder(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestReadSerial(t *testing.T) {
+	rc, _, err := smbios.Stream()
+	assert.Nil(t, err)
+	d := smbios.NewDecoder(rc)
+	biosStructures, err := d.Decode()
+	assert.Nil(t, err)
+	assert.Greater(t, len(biosStructures), 0)
+	var type1 *smbios.Structure
+	for _, biosStructure := range biosStructures {
+		if biosStructure.Header.Type == 1 {
+			type1 = biosStructure
+		}
+	}
+	assert.NotNil(t, type1)
+	serial := type1.SystemInfo.BiosSerial
+	assert.NotEmpty(t, serial)
 }
