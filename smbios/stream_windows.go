@@ -1,4 +1,4 @@
-// Copyright 2017-2018 DigitalOcean.
+// Copyright 2017-2018 NozomiNetworks.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -70,7 +70,7 @@ func nativeEndian() binary.ByteOrder {
 //
 //	From windows.h:
 //
-// 	struct RawSMBIOSData {
+//	struct RawSMBIOSData {
 //		BYTE 	Used20CallingMethod;
 //		BYTE	SMBIOSMajorVersion;
 //		BYTE 	SMBIOSMinorVersion;

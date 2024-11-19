@@ -1,4 +1,4 @@
-// Copyright 2017-2018 DigitalOcean.
+// Copyright 2017-2018 NozomiNetworks.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//+build !dragonfly,!freebsd,!linux,!netbsd,!openbsd,!solaris,!windows
+//go:build !dragonfly && !freebsd && !linux && !netbsd && !openbsd && !solaris && !windows
+// +build !dragonfly,!freebsd,!linux,!netbsd,!openbsd,!solaris,!windows
 
 package smbios
 

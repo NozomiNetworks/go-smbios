@@ -1,4 +1,4 @@
-// Copyright 2017-2018 DigitalOcean.
+// Copyright 2017-2018 NozomiNetworks.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,11 +24,9 @@ type Header struct {
 //SystemEnclosure struct to fetch the chassis type information
 
 type SystemEnclosure struct {
-
 	Manufacturer byte
 
-	Type         byte
-
+	Type byte
 }
 
 // A Structure is an SMBIOS structure.
@@ -192,10 +190,10 @@ type Processor struct {
 type SystemInfo struct {
 	SystemManufacturerRef, SystemProductName, BiosSerial, VirtualMachineUUID,
 	MotherboardAdapter, Memory, ProcessorType, ProcessorID string
-	BiosInfo      *BIOSInfo
-	BaseboardInfo *BaseboardInfo
-	Processors    []*Processor
-	PhyMemory     []*PhysicalMemory
+	BiosInfo        *BIOSInfo
+	BaseboardInfo   *BaseboardInfo
+	Processors      []*Processor
+	PhyMemory       []*PhysicalMemory
 	SystemEnclosure *SystemEnclosure
 }
 
