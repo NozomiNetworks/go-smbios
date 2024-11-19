@@ -59,7 +59,6 @@ type SMBIOSBaseboardInfo struct {
 	ChassisHandle      uint16
 	BoardType          byte
 	ObjectHandlesCount byte
-	ObjectHandles      uintptr
 }
 
 type BaseboardInfo struct {
