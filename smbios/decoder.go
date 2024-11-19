@@ -158,9 +158,9 @@ func (d *Decoder) next() (*Structure, error) {
 }
 
 func (*Decoder) parseType1(fb []byte, h *Header, systemInfo *SystemInfo, ss []string) []string {
-	sysInfo := &SMBIOSSystemInfo{}
+	sysInfo := SMBIOSSystemInfo{}
 	safeReader := bytes.NewReader(fb)
-	readErr := binary.Read(safeReader, binary.LittleEndian, sysInfo)
+	readErr := binary.Read(safeReader, binary.LittleEndian, &sysInfo)
 	if readErr != nil {
 		return []string{}
 	}
@@ -202,12 +202,12 @@ func (*Decoder) parseType1(fb []byte, h *Header, systemInfo *SystemInfo, ss []st
 }
 
 func (*Decoder) parseType2(fb []byte, ss []string, systemInfo *SystemInfo) {
-	bbInfo := &BaseboardInfo{}
-	systemInfo.BaseboardInfo = bbInfo
+	bbInfo := BaseboardInfo{}
+	systemInfo.BaseboardInfo = &bbInfo
 
-	mbInfo := &SMBIOSBaseboardInfo{}
+	mbInfo := SMBIOSBaseboardInfo{}
 	safeReader := bytes.NewReader(fb)
-	readErr := binary.Read(safeReader, binary.LittleEndian, mbInfo)
+	readErr := binary.Read(safeReader, binary.LittleEndian, &mbInfo)
 
 	if readErr != nil {
 		return
@@ -233,11 +233,11 @@ func (*Decoder) parseType2(fb []byte, ss []string, systemInfo *SystemInfo) {
 }
 
 func (*Decoder) parseType3(fb []byte, systemInfo *SystemInfo) {
-	sysEnclosure := &SystemEnclosure{}
-	systemInfo.SystemEnclosure = &SystemEnclosure{}
+	sysEnclosure := SystemEnclosure{}
+	systemInfo.SystemEnclosure = &sysEnclosure
 
 	safeReader := bytes.NewReader(fb)
-	readErr := binary.Read(safeReader, binary.LittleEndian, systemInfo)
+	readErr := binary.Read(safeReader, binary.LittleEndian, &sysEnclosure)
 	if readErr != nil {
 		return
 	}
@@ -248,9 +248,9 @@ func (*Decoder) parseType3(fb []byte, systemInfo *SystemInfo) {
 }
 
 func (d *Decoder) parseType4(fb []byte, systemInfo *SystemInfo, ss []string) {
-	procInfo := &SMBIOSProcessorType{}
+	procInfo := SMBIOSProcessorType{}
 	safeReader := bytes.NewReader(fb)
-	readErr := binary.Read(safeReader, binary.LittleEndian, procInfo)
+	readErr := binary.Read(safeReader, binary.LittleEndian, &procInfo)
 	if readErr != nil {
 		return
 	}
@@ -299,7 +299,7 @@ func (d *Decoder) parseType4(fb []byte, systemInfo *SystemInfo, ss []string) {
 }
 
 func (*Decoder) parseType17(fb []byte, ss []string, systemInfo *SystemInfo) {
-	physicalMemory := &PhysicalMemory{}
+	physicalMemory := PhysicalMemory{}
 
 	fbLen := len(fb)
 	var memInfo MemoryInfoRead
@@ -415,17 +415,16 @@ func (*Decoder) parseType17(fb []byte, ss []string, systemInfo *SystemInfo) {
 
 	// Check for the size, if size is zero that means Empty DIMM Slot
 	if physicalMemory.SizeInBytes != 0 {
-		systemInfo.PhyMemory = append(systemInfo.PhyMemory, physicalMemory)
+		systemInfo.PhyMemory = append(systemInfo.PhyMemory, &physicalMemory)
 	}
 }
 
 func (d *Decoder) parseType0(fb []byte, ss []string, systemInfo *SystemInfo) {
-	bios := &BIOSInfoRead{}
-
+	bios := BIOSInfoRead{}
 	biosInfo := &BIOSInfo{}
 	systemInfo.BiosInfo = biosInfo
 	safeReader := bytes.NewReader(fb)
-	readErr := binary.Read(safeReader, binary.LittleEndian, bios)
+	readErr := binary.Read(safeReader, binary.LittleEndian, &bios)
 	if readErr != nil {
 		return
 	}
